@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get '/search', to: 'movies#search'
   post '/search', to: 'movies#search'
   get '/movie/:id', to: 'movies#movie'
+  root :to => "movies#search"
 end
