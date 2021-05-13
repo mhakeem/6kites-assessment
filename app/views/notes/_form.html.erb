@@ -1,0 +1,25 @@
+<div class="container">
+
+  <p></p>
+  
+  <%= form_with model: @note, local: true do |f| %>
+    <div class="form-group">
+      <%= f.label 'Note Entry' %>
+      <%= f.text_area :entry, class: "form-control", rows: 3 %>
+    </div>
+    <% if @movie_id %>
+      <%= hidden_field_tag :movie_id, @movie_id %>
+    <% end %>
+    <%= f.submit 'Submit', class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+<div class="container">
+  <br>
+  <hr>
+  <h5>debug:</h5>
+
+  <%= debug params %>
+  <%= debug @movie_id %>
+  <%= debug @note.inspect %>
+</div>
