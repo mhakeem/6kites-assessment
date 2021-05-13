@@ -11,9 +11,10 @@ class MoviesController < ApplicationController
 
   def search
     @term = params[:term]
+    @page = params[:page] || 1
 
     unless (@term.blank?)
-      @movies = Movie.search(@term)
+      @movies = Movie.search(@term, @page)
     else
       @movies = []
     end

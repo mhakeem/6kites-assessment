@@ -12,9 +12,10 @@ class Movie
     parsed
   end
 
-  def self.search(term)
-      results = HTTParty.get(BASE_URL + "&s=#{term}")
-      parsed = results.parsed_response
-      parsed['Search']
+  def self.search(term, page=1)
+    results = HTTParty.get(BASE_URL + "&s=#{term}&page=#{page}")
+    parsed = results.parsed_response
+    parsed['Search']
   end
+
 end
