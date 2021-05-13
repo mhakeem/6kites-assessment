@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
     @movie_id = params[:id]
     @movie = Movie.get(@movie_id)
     @note = Note.find_by(movie_id: @movie_id)
-    
+    @fav = Favorite.find_by(movie_id: @movie_id)
   end
 
   def search

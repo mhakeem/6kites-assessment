@@ -24,6 +24,14 @@
     <% else %>
       <div><%= link_to 'Add Note', new_note_path(movie_id: @movie['imdbID']) %></div>
     <% end %>
+
+    <div>
+      <% if @fav %>
+        <%= button_to '♡ Unfave', favorite_path(@fav), method: :delete, class: 'btn btn-dark btn-sm' %>
+      <% else %>
+        <%= button_to '♥️ Fave', favorites_path(movie_id: @movie['imdbID']), class: 'btn btn-light btn-sm' %>
+      <% end %>
+    </div>
     
   </div>
 </div>
@@ -31,6 +39,3 @@
 <div style="margin-left: 25px">
   <button onclick="javascript:history.back()" class="btn btn-primary btn-sm">Back</button>
 </div>
-
-<hr>
-<%= debug params %>

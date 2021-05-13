@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_13_081908) do
+ActiveRecord::Schema.define(version: 2021_05_13_090400) do
+
+  create_table "favorites", force: :cascade do |t|
+    t.string "movie_id"
+    t.boolean "faved", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_favorites_on_movie_id"
+  end
 
   create_table "notes", force: :cascade do |t|
     t.string "movie_id"

@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get '/movie/:id', to: 'movies#movie', as: 'movie'
 
   resources :notes, only: [:new, :create, :edit, :update]
+  resources :favorites, only: [:create, :destroy]
 end
