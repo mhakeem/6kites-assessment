@@ -1,14 +1,12 @@
 <div class="container">
   <div style="display: flex; margin: 20px">
     <div style="width: 150px; float: left; padding: 5px">
-      <%= image_tag @movie['Poster'], style: "height: 200px;" %>
+      <%= image_tag @movie['Poster'], style: "height: 200px; width: 130px;" %>
     </div>
 
     <div style="flex-grow: 1; padding-left: 5px">
       <div style="font-size: 22px">
-        <a href="https://www.imdb.com/title/<%= @movie['imdbID'] %>/" target="_blank">
-          <%= @movie['Title'] %>
-        </a>
+        <%= link_to @movie['Title'], @movie['imdbURL'], target: 'blank' %>
       </div>
       <h6 class="text-muted"><%= @movie['Year'] %> &bull; <%= @movie['Rated'] %></h6>
       

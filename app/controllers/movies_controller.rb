@@ -15,6 +15,8 @@ class MoviesController < ApplicationController
 
     unless (@term.blank?)
       @movies = Movie.search(@term, @page)
+      @total_pages = Movie.pages
+      @total_results = Movie.total_results
     else
       @movies = []
     end
