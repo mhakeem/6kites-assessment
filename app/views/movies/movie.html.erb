@@ -1,41 +1,44 @@
-<div style="display: flex; margin: 20px">
-  <div style="width: 150px; float: left; padding: 5px">
-    <img height="200px" src="<%= @movie['Poster'] %>"/>
-  </div>
-
-  <div style="flex-grow: 1; padding-left: 5px">
-    <div style="font-size: 22px">
-      <a href="https://www.imdb.com/title/<%= @movie['imdbID'] %>/" target="_blank">
-        <%= @movie['Title'] %>
-      </a>
+<div class="container">
+  <div style="display: flex; margin: 20px">
+    <div style="width: 150px; float: left; padding: 5px">
+      <%= image_tag @movie['Poster'], style: "height: 200px;" %>
     </div>
-    <div>Released <%= @movie['Year'] %></div>
-    <div>Rated <%= @movie['Rated'] %></div>
-    <div>Directed by <%= @movie['Director'] %></div>
-    <div>Starring <%= @movie['Actors'] %></div>
 
-    <% if @note %>
-      <div>
-        <br>
-        <b>Note:</b>
-        <%= @note.entry %>
+    <div style="flex-grow: 1; padding-left: 5px">
+      <div style="font-size: 22px">
+        <a href="https://www.imdb.com/title/<%= @movie['imdbID'] %>/" target="_blank">
+          <%= @movie['Title'] %>
+        </a>
       </div>
-      <div><%= link_to 'Edit Note', edit_note_path(@note) %></div>
-    <% else %>
-      <div><%= link_to 'Add Note', new_note_path(movie_id: @movie['imdbID']) %></div>
-    <% end %>
+      <h6 class="text-muted"><%= @movie['Year'] %> &bull; <%= @movie['Rated'] %></h6>
+      
+      <div><strong>Directed by:</strong> <%= @movie['Director'] %></div>
+      <div><strong>Starring:</strong> <%= @movie['Actors'] %></div>
 
-    <div>
-      <% if @fav %>
-        <%= button_to '♡ Unfave', favorite_path(@fav), method: :delete, class: 'btn btn-dark btn-sm' %>
+      <% if @note %>
+        <div>
+          <br>
+          <b>Note:</b>
+          <%= @note.entry %>
+        </div>
+        <div><%= link_to 'Edit Note', edit_note_path(@note) %></div>
       <% else %>
-        <%= button_to '♥️ Fave', favorites_path(movie_id: @movie['imdbID']), class: 'btn btn-light btn-sm' %>
+        <div><%= link_to 'Add Note', new_note_path(movie_id: @movie['imdbID']) %></div>
       <% end %>
-    </div>
-    
-  </div>
-</div>
 
-<div style="margin-left: 25px">
-  <button onclick="javascript:history.back()" class="btn btn-primary btn-sm">Back</button>
+      <div>
+        <% if @fav %>
+          <%= button_to '♡ Unfave', favorite_path(@fav), method: :delete, class: 'btn btn-dark btn-sm' %>
+        <% else %>
+          <%= button_to '♥️ Fave', favorites_path(movie_id: @movie['imdbID']), class: 'btn btn-light btn-sm' %>
+        <% end %>
+      </div>
+      
+    </div>
+  </div>
+
+  <div style="margin-left: 25px">
+    <button onclick="javascript:history.back()" class="btn btn-primary btn-sm">Back</button>
+  </div>
+
 </div>

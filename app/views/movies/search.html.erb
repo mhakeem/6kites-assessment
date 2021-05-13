@@ -1,6 +1,4 @@
-<body>
-  <div class="container" style="margin: 20px">
-  <h3>Movie Search</h3>
+<div class="container" style="margin-top: 20px">
   <form action="/search" method="post" id="search-form">
     <div class="form-group">
 
@@ -13,13 +11,24 @@
 
     </div>
   </form>
+
   <% if (@movies.length > 0) %>
     <div style="margin-bottom: 12px">SHOWING FIRST <%= @movies.length %> RESULTS</div>
-    <ul>
-    <% @movies.each do |movie| %>
-      <li><a href="/movie/<%= movie['imdbID'] %>"><%= movie["Title"] %></a></li>
-    <% end %>
-    </ul>
+    
+    <div class="row">
+      <% @movies.each do |movie| %>
+        <div class="col-md-3">
+          <div class="card mb-3" style="width: 14rem;">
+            <%= image_tag movie['Poster'], class: 'card-img-top', style: 'height: 18rem' %>
+            <div class="card-body">
+              <small class="card-subtitle mb-2 text-muted"><%= movie['Year'] %></small>
+              <h6 class="card-title"><%= movie['Title'] %></h6>
+              <%= link_to 'Details', movie_path(movie['imdbID']), class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   <% end %>
-  </div>
-</body>
+  
+</div>

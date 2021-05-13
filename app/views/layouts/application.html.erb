@@ -11,6 +11,15 @@
   </head>
 
   <body>
+    <header>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          
+          <%= link_to 'Movie Search', root_path, class: 'navbar-brand d-flex align-items-center font-weight-bold' %>
+        </div>
+      </div>
+    </header>
+
     <%= yield %>
   </body>
 </html>
