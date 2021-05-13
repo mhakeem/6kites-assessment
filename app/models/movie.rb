@@ -16,12 +16,9 @@ class Movie
   end
 
   def self.search(term, page=1)
-    # options = query_options.deep_merge({query: {s: term, page: page}})
-    # results = HTTParty.get(BASE_URL, options)
-    # parsed = results.parsed_response
-    
-    file = File.read "/home/mhakeem/Documents/omdbapi-1620712801522.json"
-    parsed = JSON.parse file
+    options = query_options.deep_merge({query: {s: term, page: page}})
+    results = HTTParty.get(BASE_URL, options)
+    parsed = results.parsed_response
 
     movies = parsed['Search']
     movies.each do |m|
