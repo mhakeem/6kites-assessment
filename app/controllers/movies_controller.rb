@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
 
-  skip_before_action :verify_authenticity_token
+  before_action :verify_authenticity_token
 
   def movie
     @movie_id = params[:id]

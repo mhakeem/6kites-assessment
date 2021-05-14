@@ -3,15 +3,13 @@ class Movie
   
   @@pages = 0
 
-
   def self.get(movie_id)
     options = query_options.deep_merge({query: {i: movie_id}})
     results = HTTParty.get(BASE_URL, options)
     movie = results.parsed_response
-    movie['imdbURL'] = "https://www.imdb.com/title/#{movie['imdbID']}"
-    if movie['Poster'] == 'N/A'
-      movie['Poster'] = "https://via.placeholder.com/400?text=No+Image"
-    end
+    
+    add_imdb_url(movie)
+    fix_no_movie_poster(movie)
     movie
   end
 
@@ -19,13 +17,9 @@ class Movie
     options = query_options.deep_merge({query: {s: term, page: page}})
     results = HTTParty.get(BASE_URL, options)
     parsed = results.parsed_response
-
     movies = parsed['Search']
-    movies.each do |m|
-      if m['Poster'] == 'N/A'
-        m['Poster'] = "https://via.placeholder.com/400?text=No+Image"
-      end
-    end
+
+    fix_no_movies_poster(movies)
     total_pages(parsed['totalResults'])
     movies
   end
@@ -47,6 +41,22 @@ class Movie
   def self.query_options
     apikey  = ENV['OMDB_API_KEY']
     {query: {apikey: apikey, type: 'movie'}}
+  end
+
+  def self.fix_no_movies_poster(movies)
+    movies.each do |m|
+      fix_no_movie_poster(m)
+    end
+  end
+
+  def self.fix_no_movie_poster(movie)
+    if movie['Poster'] == 'N/A'
+      movie['Poster'] = "https://via.placeholder.com/400?text=No+Image"
+    end
+  end
+
+  def self.add_imdb_url(movie)
+    movie['imdbURL'] = "https://www.imdb.com/title/#{movie['imdbID']}"
   end
 
 end
