@@ -1,17 +1,17 @@
 <div class="container">
   <div style="display: flex; margin: 20px">
     <div style="width: 150px; float: left; padding: 5px">
-      <%= image_tag @movie['Poster'], style: "height: 200px; width: 130px;" %>
+      <%= image_tag @movie.poster, style: "height: 200px; width: 130px;" %>
     </div>
 
     <div style="flex-grow: 1; padding-left: 5px">
       <div style="font-size: 22px">
-        <%= link_to @movie['Title'], @movie['imdbURL'], target: 'blank' %>
+        <%= link_to @movie.title, @movie.imdb_url, target: 'blank' %>
       </div>
-      <h6 class="text-muted"><%= @movie['Year'] %> &bull; <%= @movie['Rated'] %></h6>
-      
-      <div><strong>Directed by:</strong> <%= @movie['Director'] %></div>
-      <div><strong>Starring:</strong> <%= @movie['Actors'] %></div>
+      <h6 class="text-muted"><%= @movie.year %> &bull; <%= @movie.rated %></h6>
+
+      <div><strong>Directed by:</strong> <%= @movie.director %></div>
+      <div><strong>Starring:</strong> <%= @movie.actors %></div>
 
       <% if @note %>
         <div>
@@ -21,17 +21,17 @@
         </div>
         <div><%= link_to 'Edit Note', edit_note_path(@note) %></div>
       <% else %>
-        <div><%= link_to 'Add Note', new_note_path(movie_id: @movie['imdbID']) %></div>
+        <div><%= link_to 'Add Note', new_note_path(movie_id: @movie.imdb_id) %></div>
       <% end %>
 
       <div>
         <% if @fav %>
           <%= button_to '♡ Unfave', favorite_path(@fav), method: :delete, class: 'btn btn-dark btn-sm' %>
         <% else %>
-          <%= button_to '♥️ Fave', favorites_path(movie_id: @movie['imdbID']), class: 'btn btn-light btn-sm' %>
+          <%= button_to '♥️ Fave', favorites_path(movie_id: @movie.imdb_id), class: 'btn btn-light btn-sm' %>
         <% end %>
       </div>
-      
+
     </div>
   </div>
 

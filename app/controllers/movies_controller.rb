@@ -1,5 +1,4 @@
 class MoviesController < ApplicationController
-
   before_action :verify_authenticity_token
 
   def movie
@@ -13,13 +12,13 @@ class MoviesController < ApplicationController
     @term = params[:term]
     @page = params[:page] || 1
 
-    unless (@term.blank?)
-      @movies = Movie.search(@term, @page)
-      @total_pages = Movie.pages
-      @total_results = Movie.total_results
-    else
+    if @term.blank?
       @movies = []
+    else
+      search = Movie.search(@term, @page)
+      @movies = search.results
+      @total_pages = search.total_pages
+      @total_results = search.total_results
     end
   end
-
 end
