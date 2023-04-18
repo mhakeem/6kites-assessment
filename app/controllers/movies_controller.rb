@@ -10,15 +10,12 @@ class MoviesController < ApplicationController
 
   def search
     @term = params[:term]
-    @page = params[:page] || 1
+    @page = (params[:page] || 1).to_i
 
-    if @term.blank?
-      @movies = []
-    else
-      search = Movie.search(@term, @page)
-      @movies = search.results
-      @total_pages = search.total_pages
-      @total_results = search.total_results
-    end
+    search = Movie.search(@term, @page)
+    @movies = search.results
+    @total_pages = search.total_pages
+    @total_results = search.total_results
+    @pagy = Pagy.new(count: @total_results, page: @page, items: Omdb::Result::PER_PAGE, params: { term: @term })
   end
 end
