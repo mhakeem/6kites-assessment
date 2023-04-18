@@ -49,14 +49,9 @@ module Omdb
     include ApiExceptions
     include HttpStatusErrors
 
-    def initialize(base_url)
+    def initialize(base_url, default_params = {})
       @base_url = base_url
-      @default_params = {
-        query: {
-          apikey: ENV.fetch('OMDB_API_KEY'),
-          type: 'movie'
-        }
-      }
+      @default_params = default_params
     end
 
     def get(query_params)

@@ -4,10 +4,9 @@ module Omdb
   class Result
     PER_PAGE = 10
 
-    attr_reader :page, :total_results, :results
+    attr_reader :total_results, :results
 
-    def initialize(page, result)
-      @page = page
+    def initialize(result)
       @total_results = result['totalResults'].to_i
       @results = build_movies_results(result['Search'])
     end

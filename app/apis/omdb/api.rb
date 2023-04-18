@@ -13,14 +13,27 @@ module Omdb
       end
 
       def search(term, page = 1)
+        return Omdb::EmptyResult.new if term.blank?
+
         query = { query: { s: term, page: page } }
         result = client.get(query)
         # result = JSON.parse(File.read('data/search.json'))
-        Result.new(page, result)
+        Result.new(result)
       end
 
       def client
-        @client ||= Client.new(BASE_URL)
+        @client ||= Client.new(BASE_URL, default_params)
+      end
+
+      private
+
+      def default_params
+        {
+          query: {
+            apikey: ENV.fetch('OMDB_API_KEY'),
+            type: 'movie'
+          }
+        }
       end
     end
   end

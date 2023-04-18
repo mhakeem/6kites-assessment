@@ -17,7 +17,8 @@
   <% if (@movies.length > 0) %>
     <div style="margin-bottom: 12px">SHOWING <%= @movies.length %> RESULTS PER PAGE</div>
     <div style="margin-bottom: 12px">Total search results: <%= @total_results %></div>
-    <%= render 'paginate' %>
+
+    <%== pagy_bootstrap_nav(@pagy) %>
 
     <div class="row">
       <% @movies.each do |movie| %>
@@ -34,7 +35,8 @@
       <% end %>
     </div>
 
-    <%= render 'paginate' %>
+    <%== pagy_bootstrap_nav(@pagy) %>
+
   <% end %>
 
 </div>
