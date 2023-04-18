@@ -4,6 +4,7 @@
     <div class="form-group">
 
       <div class="input-group">
+        <%= hidden_field_tag :something, 'vals' %>
         <%= f.text_field :term, class: "form-control", placeholder: 'Enter search text' %>
         <div class="input-group-append">
           <%= f.submit 'Search', class: "btn btn-outline-primary" %>
@@ -17,16 +18,16 @@
     <div style="margin-bottom: 12px">SHOWING <%= @movies.length %> RESULTS PER PAGE</div>
     <div style="margin-bottom: 12px">Total search results: <%= @total_results %></div>
     <%= render 'paginate' %>
-    
+
     <div class="row">
       <% @movies.each do |movie| %>
         <div class="col col-md-3">
           <div class="card mb-3" style="width: 14rem;">
-            <%= image_tag movie['Poster'], class: 'card-img-top', style: 'height: 18rem' %>
+            <%= image_tag movie.poster, class: 'card-img-top', style: 'height: 18rem' %>
             <div class="card-body">
-              <small class="card-subtitle mb-2 text-muted"><%= movie['Year'] %></small>
-              <h6 class="card-title"><%= movie['Title'] %></h6>
-              <%= link_to 'Details', movie_path(movie['imdbID']), class: 'btn btn-primary' %>
+              <small class="card-subtitle mb-2 text-muted"><%= movie.year %></small>
+              <h6 class="card-title"><%= movie.title %></h6>
+              <%= link_to 'Details', movie_path(movie.imdb_id), class: 'btn btn-primary' %>
             </div>
           </div>
         </div>
@@ -35,5 +36,5 @@
 
     <%= render 'paginate' %>
   <% end %>
-  
+
 </div>
